@@ -20,48 +20,51 @@
       /* THICK HEADER */
       .header {
         background-color: #cc0000;
-        padding: 28px 30px;
+        padding: 32px 35px; /* thicker */
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 20px;
       }
 
-      /* LEFT NAV (Home, News, Sport) */
+      /* LEFT NAV */
       .nav-left {
         display: flex;
-        gap: 28px;
+        gap: 32px;
         align-items: center;
       }
 
       .nav-left a {
         color: white;
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 700;
         text-decoration: none;
-        padding: 6px 0;
-        transition: opacity 0.15s ease, border-bottom 0.15s ease;
+        padding-bottom: 4px;
       }
 
       .nav-left a.active {
         border-bottom: 3px solid white;
       }
 
-      .nav-left a:hover { opacity: 0.9; }
-
-      /* RIGHT TITLE (stacked KEGS / Standard) */
-      .title-right {
-        text-align: right;
-        color: white;
-        font-family: 'Merriweather', serif;
-        line-height: 0.9;
+      .nav-left a:hover {
+        opacity: 0.9;
       }
 
-      .title-right .top { font-size: 46px; font-weight: 900; }
-      .title-right .bottom { font-size: 34px; font-weight: 900; }
+      /* RIGHT TITLE — NEW SINGLE-LINE VERSION */
+      .title-right {
+        color: white;
+        font-family: 'Merriweather', serif;
+        font-size: 58px;     /* BIGGER */
+        font-weight: 900;    /* BOLDER */
+        letter-spacing: 0.5px;
+      }
 
       /* PAGE LAYOUT */
-      .container { max-width: 1000px; margin: 28px auto; padding: 0 20px; }
+      .container {
+        max-width: 1000px;
+        margin: 28px auto;
+        padding: 0 20px;
+      }
+
       .content {
         background: white;
         padding: 28px;
@@ -89,8 +92,14 @@
         z-index: 1200;
       }
 
-      .cookies-popup.show { bottom: 18px; }
-      .cookies-buttons { display: flex; gap: 10px; }
+      .cookies-popup.show {
+        bottom: 18px;
+      }
+
+      .cookies-buttons {
+        display: flex;
+        gap: 10px;
+      }
 
       .cookies-popup button {
         background: #cc0000;
@@ -102,16 +111,16 @@
         border-radius: 4px;
       }
 
-      .cookies-popup button:hover { filter: brightness(0.92); }
-      .reject-btn { background: #555; }
-      .reject-btn:hover { filter: brightness(0.9); }
+      .cookies-popup button:hover {
+        filter: brightness(0.92);
+      }
 
-      @media (max-width: 720px) {
-        .header { padding: 18px 16px; }
-        .nav-left a { font-size: 18px; gap: 16px; }
-        .title-right .top { font-size: 34px; }
-        .title-right .bottom { font-size: 24px; }
-        .cookies-popup { font-size: 14px; padding: 14px; }
+      .reject-btn {
+        background: #555;
+      }
+
+      .reject-btn:hover {
+        filter: brightness(0.9);
       }
     </style>
   </head>
@@ -120,37 +129,30 @@
 
     <!-- HEADER -->
     <div class="header">
-      <!-- LEFT NAV uses hash links so refresh won't request a new path -->
-      <nav class="nav-left" aria-label="Main navigation">
+      <nav class="nav-left">
         <a href="#/home" id="nav-home">Home</a>
         <a href="#/news" id="nav-news">News</a>
         <a href="#/sport" id="nav-sport">Sport</a>
       </nav>
 
-      <!-- RIGHT STACKED TITLE -->
-      <div class="title-right" aria-hidden="false">
-        <div class="top">KEGS</div>
-        <div class="bottom">Standard</div>
-      </div>
+      <!-- NEW SINGLE-LINE TITLE -->
+      <div class="title-right">KEGS Standard</div>
     </div>
 
-    <!-- MAIN CONTAINER -->
+    <!-- MAIN CONTENT -->
     <div class="container">
       <div class="content">
 
-        <!-- Home section -->
         <section id="section-home">
           <h2>Hello, world!</h2>
           <p>This is my first website hosted on GitHub Pages.</p>
         </section>
 
-        <!-- News section -->
         <section id="section-news" style="display:none;">
           <h2>News</h2>
           <p>News</p>
         </section>
 
-        <!-- Sport section -->
         <section id="section-sport" style="display:none;">
           <h2>Sport</h2>
           <p>Sport</p>
@@ -160,7 +162,7 @@
     </div>
 
     <!-- COOKIES POPUP -->
-    <div class="cookies-popup" id="cookiesBar" role="dialog" aria-live="polite">
+    <div class="cookies-popup" id="cookiesBar">
       <span>This website uses cookies to improve your experience.</span>
       <div class="cookies-buttons">
         <button id="acceptBtn">Accept All Cookies</button>
@@ -169,7 +171,6 @@
     </div>
 
     <script>
-      // Hash routing: map hash -> section
       function hashToSection(hash) {
         const h = (hash || '#/home').replace(/^#/, '').replace(/\/+$/, '');
         if (h === '' || h === '/' || h === '/home') return 'home';
@@ -181,44 +182,32 @@
       function showSection(name) {
         const sections = ['home','news','sport'];
         sections.forEach(s => {
-          const el = document.getElementById('section-' + s);
-          if (s === name) el.style.display = '';
-          else el.style.display = 'none';
-        });
-        sections.forEach(s => {
-          const link = document.getElementById('nav-' + s);
-          if (s === name) link.classList.add('active');
-          else link.classList.remove('active');
+          document.getElementById('section-' + s).style.display = (s === name ? '' : 'none');
+          document.getElementById('nav-' + s).classList.toggle('active', s === name);
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // On load: show section based on hash
       window.addEventListener('load', function() {
-        const initial = hashToSection(location.hash);
-        // If no hash present, set to #/home
         if (!location.hash) location.replace('#/home');
-        showSection(initial);
+        showSection(hashToSection(location.hash));
 
-        // show cookies bar after a short delay
-        setTimeout(function() {
+        setTimeout(() => {
           document.getElementById('cookiesBar').classList.add('show');
         }, 450);
       });
 
-      // On hash change (back/forward or link click)
       window.addEventListener('hashchange', function() {
-        const section = hashToSection(location.hash);
-        showSection(section);
+        showSection(hashToSection(location.hash));
       });
 
-      // Cookies buttons
       document.getElementById('acceptBtn').addEventListener('click', hideCookies);
       document.getElementById('rejectBtn').addEventListener('click', hideCookies);
+
       function hideCookies() {
         const bar = document.getElementById('cookiesBar');
         bar.classList.remove('show');
-        setTimeout(function(){ bar.style.display = 'none'; }, 650);
+        setTimeout(() => bar.style.display = 'none', 650);
       }
     </script>
 
