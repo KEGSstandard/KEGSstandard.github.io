@@ -78,7 +78,8 @@
 
       .news-title,
       .sport-title,
-      .world-title {
+      .world-title,
+      .business-title {
         text-align: center;
         font-family: 'Merriweather', serif;
         font-size: 48px;
@@ -94,7 +95,8 @@
 
       .tuchel-img,
       .burnham-img,
-      .kegs-img {
+      .kegs-img,
+      .putin-img {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -185,6 +187,7 @@
       <nav class="nav-left">
         <a href="#/home" id="nav-home">Home</a>
         <a href="#/world" id="nav-world">World News</a>
+        <a href="#/business" id="nav-business">Business</a>
         <a href="#/news" id="nav-news">News</a>
         <a href="#/sport" id="nav-sport">Sport</a>
       </nav>
@@ -201,7 +204,16 @@
         </section>
 
         <section id="section-world" class="section hidden">
-          <h2 class="world-title">World News</h2>
+          <h2 class="world-title">Putin admits problems</h2>
+          <img src="putin.png" class="putin-img">
+          <p>Lorem ipsum placeholder sentence number one for you to replace later.</p>
+          <p>Lorem ipsum placeholder sentence number two for you to replace later.</p>
+          <p>Lorem ipsum placeholder sentence number three for you to replace later.</p>
+          <p>Lorem ipsum placeholder sentence number four for you to replace later.</p>
+        </section>
+
+        <section id="section-business" class="section hidden">
+          <h2 class="business-title">Vibe Lawyers</h2>
         </section>
 
         <section id="section-news" class="section hidden">
@@ -217,7 +229,7 @@
           <h2 class="sport-title">England In The World Cup</h2>
           <img src="tuchel.png" class="tuchel-img">
           <h3>Tuchel’s England Reach the round of 16</h3>
-          <p><strong>World Cup-</strong> Thomas Tuchel has officially taken charge of England’s national team, and the Three Lions now have a completely different playstyle. After speculation and questions about whether the former Chelsea and Bayern Munich manager could adapt to international football, Tuchel has delivered a clear message: England will play on the front foot.</p>
+          <p>Thomas Tuchel has officially taken charge of England’s national team, and the Three Lions now have a completely different playstyle. After speculation and questions about whether the former Chelsea and Bayern Munich manager could adapt to international football, Tuchel has delivered a clear message: England will play on the front foot.</p>
           <p>Tuchel’s arrival has brought a level of intensity and structure England fans are excited about. Training sessions have been described as “relentless,” with players pushed to operate in tight spaces, recycle possession quickly, and press with coordinated aggression. Several squad members have privately admitted that Tuchel’s tactical detail is “unlike anything they’ve experienced at international level.”</p>
           <p>The biggest shift has been England’s shape. Tuchel has implemented a flexible 3‑4‑3 system, allowing England to dominate transitions while giving creative freedom to attacking stars like Jude Bellingham and Phil Foden. Harry Kane has praised Tuchel’s tactics, saying the team “finally feels like it has a clear plan in every phase of play.”</p>
           <p>Whether this new‑look England can win the world cup to be seen, but one thing is clear: under Thomas Tuchel, England are a clear contender for the World Cup title.</p>
@@ -236,20 +248,21 @@
     </div>
 
     <script>
-      const tabOrder = ["home", "world", "news", "sport"];
+      const tabOrder = ["home", "world", "business", "news", "sport"];
       let currentSection = "home";
 
       function hashToSection(hash) {
         const h = (hash || "#/home").replace(/^#/, "").replace(/\/+$/, "");
         if (h === "" || h === "/" || h === "/home") return "home";
         if (h === "/world") return "world";
+        if (h === "/business") return "business";
         if (h === "/news") return "news";
         if (h === "/sport") return "sport";
         return "home";
       }
 
       function setActiveNav(name) {
-        ["home", "world", "news", "sport"].forEach(s => {
+        ["home", "world", "business", "news", "sport"].forEach(s => {
           document.getElementById("nav-" + s).classList.toggle("active", s === name);
         });
       }
@@ -287,7 +300,7 @@
         const initial = hashToSection(location.hash);
         currentSection = initial;
 
-        ["home", "world", "news", "sport"].forEach(s => {
+        ["home", "world", "business", "news", "sport"].forEach(s => {
           const el = document.getElementById("section-" + s);
           if (s === initial) {
             el.classList.remove("hidden");
