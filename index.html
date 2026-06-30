@@ -52,4 +52,45 @@
         justify-content: space-between;
         align-items: center;
         font-size: 16px;
-        box-shadow
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+      }
+
+      .cookies-popup button {
+        background: #cc0000;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .cookies-popup button:hover {
+        background: #a80000;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- KEGS Standard Title Bar -->
+    <div class="kegs-header">
+      <h1 class="kegs-title">KEGS Standard</h1>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+      <h2>Hello, world!</h2>
+      <p>This is my first website hosted on GitHub Pages.</p>
+    </div>
+
+    <!-- Cookies Popup -->
+    <div class="cookies-popup" id="cookiesBar">
+      <span>This website uses cookies to improve your experience.</span>
+      <button onclick="document.getElementById('cookiesBar').style.display='none'">
+        Accept All Cookies
+      </button>
+    </div>
+
+  </body>
+</html>
