@@ -15,23 +15,52 @@
         background: #f7f7f7;
       }
 
-      /* Guardian-style title bar */
-      .kegs-header {
+      /* HEADER */
+      .header {
         background-color: #cc0000; /* KEGS red */
-        padding: 25px 0;
-        text-align: center;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
 
-      .kegs-title {
-        font-family: 'Merriweather', serif;
+      /* LEFT NAV (News + Sport) */
+      .nav-left {
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-left a {
         color: white;
-        font-size: 48px;
-        font-weight: 900;
-        margin: 0;
-        letter-spacing: 0.5px;
+        font-size: 22px;
+        font-weight: 700;
+        text-decoration: none;
+        padding-bottom: 4px;
       }
 
-      /* Page content */
+      .nav-left a:hover {
+        border-bottom: 3px solid white;
+      }
+
+      /* RIGHT TITLE (KEGS Standard stacked) */
+      .title-right {
+        text-align: right;
+        color: white;
+        font-family: 'Merriweather', serif;
+        line-height: 0.9;
+      }
+
+      .title-right .top {
+        font-size: 40px;
+        font-weight: 900;
+      }
+
+      .title-right .bottom {
+        font-size: 32px;
+        font-weight: 900;
+      }
+
+      /* PAGE CONTENT */
       .content {
         padding: 30px;
         max-width: 900px;
@@ -39,10 +68,10 @@
         font-size: 20px;
       }
 
-      /* Cookies popup */
+      /* COOKIES POPUP */
       .cookies-popup {
         position: fixed;
-        bottom: -200px; /* start hidden */
+        bottom: -200px; /* hidden start */
         left: 0;
         right: 0;
         background: #222;
@@ -91,18 +120,30 @@
 
   <body>
 
-    <!-- KEGS Standard Title Bar -->
-    <div class="kegs-header">
-      <h1 class="kegs-title">KEGS Standard</h1>
+    <!-- HEADER -->
+    <div class="header">
+
+      <!-- LEFT SIDE: NEWS + SPORT -->
+      <div class="nav-left">
+        <a href="#">News</a>
+        <a href="#">Sport</a>
+      </div>
+
+      <!-- RIGHT SIDE: KEGS STANDARD STACKED -->
+      <div class="title-right">
+        <div class="top">KEGS</div>
+        <div class="bottom">Standard</div>
+      </div>
+
     </div>
 
-    <!-- Page Content -->
+    <!-- PAGE CONTENT -->
     <div class="content">
       <h2>Hello, world!</h2>
       <p>This is my first website hosted on GitHub Pages.</p>
     </div>
 
-    <!-- Cookies Popup -->
+    <!-- COOKIES POPUP -->
     <div class="cookies-popup" id="cookiesBar">
       <span>This website uses cookies to improve your experience.</span>
 
@@ -113,12 +154,12 @@
     </div>
 
     <script>
-      // Glide in after page loads
+      // Slide in on page load
       window.onload = function() {
         document.getElementById('cookiesBar').classList.add('show');
       };
 
-      // Glide out when either button is clicked
+      // Slide out when either button is clicked
       function hideCookies() {
         document.getElementById('cookiesBar').classList.remove('show');
       }
