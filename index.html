@@ -314,8 +314,16 @@
         const initial = hashToSection(location.hash);
         currentSection = initial;
 
-        document.getElementById("section-" + initial).classList.remove("hidden");
-        document.getElementById("section-" + initial).classList.add("slide-active");
+        ["home", "news", "sport"].forEach(s => {
+          const el = document.getElementById("section-" + s);
+          if (s === initial) {
+            el.classList.remove("hidden");
+            el.classList.add("slide-active");
+          } else {
+            el.classList.add("hidden");
+          }
+        });
+
         setActiveNav(initial);
 
         setTimeout(() => {
