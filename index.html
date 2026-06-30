@@ -18,7 +18,7 @@
         padding-top: 120px; /* prevents content jumping under header */
       }
 
-      /* THICK HEADER — now animated */
+      /* THICK HEADER — animated */
       .header {
         background-color: #cc0000;
         padding: 32px 35px;
@@ -86,7 +86,22 @@
         font-size: 18px;
       }
 
-      /* SPORT TITLE — centred + Guardian style + underline */
+      /* NEWS TITLE — Guardian style */
+      .news-title {
+        text-align: center;
+        font-family: 'Merriweather', serif;
+        font-size: 48px;
+        font-weight: 900;
+        color: #111;
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 4px solid #cc0000;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* SPORT TITLE — Guardian style */
       .sport-title {
         text-align: center;
         font-family: 'Merriweather', serif;
@@ -101,8 +116,9 @@
         margin-right: auto;
       }
 
-      /* CENTRED TUCHEL IMAGE */
-      .tuchel-img {
+      /* CENTRED IMAGES */
+      .tuchel-img,
+      .burnham-img {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -188,13 +204,22 @@
 
         <!-- NEWS -->
         <section id="section-news" style="display:none;">
-          <h2>News</h2>
-          <p>News</p>
+          <h2 class="news-title">Andy Burnham to "transform Britain"</h2>
+
+          <img src="andyburnham.png" alt="Andy Burnham" class="burnham-img">
+
+          <p>Andy Burnham has set out his blueprint to transform the UK with a promise to improve living standards and restore faith in politics through the “biggest rebalancing of power our country has ever seen”.</p>
+
+          <p>The person widely expected to be the next prime minister said the current system was “broken” and that “more of the same” would not be enough to tackle the significant challenges faced by the country.</p>
+
+          <p>In a wide-ranging speech anchored by an ambition to “lift the country back up” and to revive hope among fed-up voters, Burnham said there needed to be a dramatic “change in how Britain is governed, not just who governs it”.</p>
+
+          <p>With Burnham now all but certain to take over from Keir Starmer in less than three weeks’ time, his address was intended to show what direction he will take the country, and reassure both Labour MPs and voters who may feel he is untested, and even unprepared, for power.</p>
         </section>
 
         <!-- SPORT -->
         <section id="section-sport" style="display:none;">
-          <h2 class="sport-title">Sport</h2>
+          <h2 class="sport-title">England In The World Cup</h2>
 
           <img src="tuchel.png" alt="Thomas Tuchel England Manager" class="tuchel-img">
 
@@ -282,3 +307,4 @@
 
   </body>
 </html>
+
