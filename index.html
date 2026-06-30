@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>KEGS Standard</title>
     <link rel="icon" type="image/png" href="favicon.png">
-
-    <!--font -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap" rel="stylesheet">
 
     <style>
@@ -18,7 +16,6 @@
         padding-top: 120px;
       }
 
-      /* HEADER (animated on scroll) */
       .header {
         background-color: #cc0000;
         padding: 32px 35px;
@@ -38,7 +35,6 @@
         opacity: 0;
       }
 
-      /* NAV */
       .nav-left {
         display: flex;
         gap: 32px;
@@ -57,11 +53,6 @@
         border-bottom: 3px solid white;
       }
 
-      .nav-left a:hover {
-        opacity: 0.9;
-      }
-
-      /* TITLE */
       .title-right {
         color: white;
         font-family: 'Merriweather', serif;
@@ -69,7 +60,6 @@
         font-weight: 900;
       }
 
-      /* PAGE LAYOUT */
       .container {
         max-width: 1000px;
         margin: 28px auto;
@@ -86,7 +76,6 @@
         overflow: hidden;
       }
 
-      /* TITLES */
       .news-title,
       .sport-title {
         text-align: center;
@@ -102,7 +91,6 @@
         margin-right: auto;
       }
 
-      /* IMAGES */
       .tuchel-img,
       .burnham-img {
         display: block;
@@ -114,7 +102,6 @@
         margin-bottom: 20px;
       }
 
-      /* SECTION ANIMATIONS */
       .section {
         transition: transform 0.45s ease, opacity 0.45s ease;
       }
@@ -148,7 +135,6 @@
         opacity: 0;
       }
 
-      /* COOKIES POPUP */
       .cookies-popup {
         position: fixed;
         bottom: -220px;
@@ -185,81 +171,54 @@
         border-radius: 4px;
       }
 
-      .cookies-popup button:hover {
-        filter: brightness(0.92);
-      }
-
       .reject-btn {
         background: #555;
-      }
-
-      .reject-btn:hover {
-        filter: brightness(0.9);
       }
     </style>
   </head>
 
   <body>
 
-    <!-- HEADER -->
     <div class="header">
       <nav class="nav-left">
         <a href="#/home" id="nav-home">Home</a>
         <a href="#/news" id="nav-news">News</a>
         <a href="#/sport" id="nav-sport">Sport</a>
       </nav>
-
       <div class="title-right">KEGS Standard</div>
     </div>
 
-    <!-- MAIN CONTENT -->
     <div class="container">
       <div class="content">
 
-        <!-- HOME -->
         <section id="section-home" class="section slide-active">
           <h2>About Us</h2>
-          <p>This is the official website of the KEGS Standard newspaper. This newspaper was built as a part of the KEGS newsday, and as 9C, we are looking forward to winning out of the other classes. To view different articles, either buy our newspaper or view the selection of articles we have on the website itself - at the top left-hand corner.</p>
+          <p>This is the official website of the KEGS Standard newspaper. This newspaper was built as a part of the KEGS newsday, and as 9C, we are looking forward to winning out of the other classes.c To view different articles, either buy our newspaper or view the selection of articles we have on the website itself - at the top left-hand corner.</p>
         </section>
 
-        <!-- NEWS -->
         <section id="section-news" class="section hidden">
           <h2 class="news-title">Andy Burnham to "transform Britain"</h2>
-
-          <img src="andyburnham.png" alt="Andy Burnham" class="burnham-img">
-
+          <img src="andyburnham.png" class="burnham-img">
           <p>Andy Burnham has set out his blueprint to transform the UK with a promise to improve living standards and restore faith in politics through the “biggest rebalancing of power our country has ever seen”.</p>
-
           <p>The person widely expected to be the next prime minister said the current system was “broken” and that “more of the same” would not be enough to tackle the significant challenges faced by the country.</p>
-
           <p>In a wide-ranging speech anchored by an ambition to “lift the country back up” and to revive hope among fed-up voters, Burnham said there needed to be a dramatic “change in how Britain is governed, not just who governs it”.</p>
-
           <p>With Burnham now all but certain to take over from Keir Starmer in less than three weeks’ time, his address was intended to show what direction he will take the country, and reassure both Labour MPs and voters who may feel he is untested, and even unprepared, for power.</p>
         </section>
 
-        <!-- SPORT -->
         <section id="section-sport" class="section hidden">
           <h2 class="sport-title">England In The World Cup</h2>
-
-          <img src="tuchel.png" alt="Thomas Tuchel England Manager" class="tuchel-img">
-
+          <img src="tuchel.png" class="tuchel-img">
           <h3>Tuchel’s England Reach the round of 16</h3>
-
           <p><strong>World Cup-</strong> Thomas Tuchel has officially taken charge of England’s national team, and the Three Lions now have a completely different playstyle. After speculation and questions about whether the former Chelsea and Bayern Munich manager could adapt to international football, Tuchel has delivered a clear message: England will play on the front foot.</p>
-
           <p>Tuchel’s arrival has brought a level of intensity and structure England fans are excited about. Training sessions have been described as “relentless,” with players pushed to operate in tight spaces, recycle possession quickly, and press with coordinated aggression. Several squad members have privately admitted that Tuchel’s tactical detail is “unlike anything they’ve experienced at international level.”</p>
-
           <p>The biggest shift has been England’s shape. Tuchel has implemented a flexible 3‑4‑3 system, allowing England to dominate transitions while giving creative freedom to attacking stars like Jude Bellingham and Phil Foden. Harry Kane has praised Tuchel’s tactics, saying the team “finally feels like it has a clear plan in every phase of play.”</p>
-
           <p>Whether this new‑look England can win the world cup to be seen, but one thing is clear: under Thomas Tuchel, England are a clear contender for the World Cup title.</p>
-
           <p>England's group stage matches have also proved that Tuchel is a manager worthy to get your hopes up for. As showun in the opening group stage game against Croatia (4-2 win) England can play with a wonderful attack and good defense. After a frustrating 0-0 draw against the heavily defensive Ghana, Tuchel has proved himself again after a masterclass 2-1 win against Panama. Hopes for a world cup title are at an all-time high.</p>
         </section>
 
       </div>
     </div>
 
-    <!-- COOKIES POPUP -->
     <div class="cookies-popup" id="cookiesBar">
       <span>This website was made by 9C.</span>
       <div class="cookies-buttons">
@@ -269,7 +228,6 @@
     </div>
 
     <script>
-      /* TAB ORDER FOR DIRECTION */
       const tabOrder = ["home", "news", "sport"];
       let currentSection = "home";
 
@@ -306,7 +264,6 @@
         setTimeout(() => {
           oldEl.classList.add("hidden");
           oldEl.classList.remove("slide-out-to-left", "slide-out-to-right");
-
           newEl.classList.remove("slide-in-from-left", "slide-in-from-right");
           newEl.classList.add("slide-active");
         }, 450);
@@ -343,7 +300,6 @@
         switchSection(target);
       });
 
-      /* COOKIES */
       document.getElementById("acceptBtn").addEventListener("click", hideCookies);
       document.getElementById("rejectBtn").addEventListener("click", hideCookies);
 
@@ -353,7 +309,6 @@
         setTimeout(() => (bar.style.display = "none"), 650);
       }
 
-      /* HEADER SCROLL ANIMATION */
       let lastScroll = 0;
 
       window.addEventListener("scroll", function () {
