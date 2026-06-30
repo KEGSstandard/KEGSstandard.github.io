@@ -77,7 +77,8 @@
       }
 
       .news-title,
-      .sport-title {
+      .sport-title,
+      .world-title {
         text-align: center;
         font-family: 'Merriweather', serif;
         font-size: 48px;
@@ -92,7 +93,8 @@
       }
 
       .tuchel-img,
-      .burnham-img {
+      .burnham-img,
+      .world-img {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -182,6 +184,7 @@
     <div class="header">
       <nav class="nav-left">
         <a href="#/home" id="nav-home">Home</a>
+        <a href="#/world" id="nav-world">World News</a>
         <a href="#/news" id="nav-news">News</a>
         <a href="#/sport" id="nav-sport">Sport</a>
       </nav>
@@ -194,6 +197,13 @@
         <section id="section-home" class="section slide-active">
           <h2>About Us</h2>
           <p>This is the official website of the KEGS Standard newspaper. This newspaper was built as a part of the KEGS newsday, and as 9C, we are looking forward to winning out of the other classes.c To view different articles, either buy our newspaper or view the selection of articles we have on the website itself - at the top left-hand corner.</p>
+        </section>
+
+        <section id="section-world" class="section hidden">
+          <h2 class="world-title">World News</h2>
+          <img src="world.png" class="world-img">
+          <p>Global events continue to shape the political and economic landscape, with major developments unfolding across Europe, Asia, and the Americas.</p>
+          <p>International leaders are responding to rising tensions, economic shifts, and new diplomatic challenges as nations navigate an increasingly complex world.</p>
         </section>
 
         <section id="section-news" class="section hidden">
@@ -228,19 +238,20 @@
     </div>
 
     <script>
-      const tabOrder = ["home", "news", "sport"];
+      const tabOrder = ["home", "world", "news", "sport"];
       let currentSection = "home";
 
       function hashToSection(hash) {
         const h = (hash || "#/home").replace(/^#/, "").replace(/\/+$/, "");
         if (h === "" || h === "/" || h === "/home") return "home";
+        if (h === "/world") return "world";
         if (h === "/news") return "news";
         if (h === "/sport") return "sport";
         return "home";
       }
 
       function setActiveNav(name) {
-        ["home", "news", "sport"].forEach(s => {
+        ["home", "world", "news", "sport"].forEach(s => {
           document.getElementById("nav-" + s).classList.toggle("active", s === name);
         });
       }
@@ -278,7 +289,7 @@
         const initial = hashToSection(location.hash);
         currentSection = initial;
 
-        ["home", "news", "sport"].forEach(s => {
+        ["home", "world", "news", "sport"].forEach(s => {
           const el = document.getElementById("section-" + s);
           if (s === initial) {
             el.classList.remove("hidden");
