@@ -83,7 +83,7 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         min-height: 220px;
         font-size: 18px;
-        overflow: hidden; /* important for slide animations */
+        overflow: hidden; /* for slide animations */
       }
 
       /* TITLES */
@@ -114,20 +114,39 @@
         margin-bottom: 20px;
       }
 
-      /* SLIDE ANIMATIONS */
+      /* SECTION ANIMATIONS (no absolute, just transitions) */
       .section {
-        position: absolute;
-        width: 100%;
-        transition: transform 0.6s ease, opacity 0.6s ease;
+        transition: transform 0.5s ease, opacity 0.5s ease;
       }
 
-      .slide-in-right { transform: translateX(100%); opacity: 0; }
-      .slide-in-left { transform: translateX(-100%); opacity: 0; }
+      .hidden {
+        display: none;
+      }
 
-      .active-section { transform: translateX(0); opacity: 1; }
+      .slide-in-from-right {
+        transform: translateX(40px);
+        opacity: 0;
+      }
 
-      .slide-out-left { transform: translateX(-100%); opacity: 0; }
-      .slide-out-right { transform: translateX(100%); opacity: 0; }
+      .slide-in-from-left {
+        transform: translateX(-40px);
+        opacity: 0;
+      }
+
+      .slide-active {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .slide-out-to-left {
+        transform: translateX(-40px);
+        opacity: 0;
+      }
+
+      .slide-out-to-right {
+        transform: translateX(40px);
+        opacity: 0;
+      }
 
       /* COOKIES POPUP */
       .cookies-popup {
@@ -198,36 +217,43 @@
       <div class="content">
 
         <!-- HOME -->
-        <section id="section-home" class="section active-section">
+        <section id="section-home" class="section">
           <h2>About Us</h2>
-          <p>This is the official website of the KEGS Standard newspaper...</p>
+          <p>This is the official website of the KEGS Standard newspaper. This newspaper was built as a part of the KEGS newsday, and as 9C, we are looking forward to winning out of the other classes.c To view different articles, either buy our newspaper or view the selection of articles we have on the website itself - at the top left-hand corner.</p>
         </section>
 
         <!-- NEWS -->
-        <section id="section-news" class="section slide-in-right">
+        <section id="section-news" class="section hidden">
           <h2 class="news-title">Andy Burnham to "transform Britain"</h2>
 
           <img src="andyburnham.png" alt="Andy Burnham" class="burnham-img">
 
-          <p>Andy Burnham has set out his blueprint...</p>
-          <p>The person widely expected...</p>
-          <p>In a wide-ranging speech...</p>
-          <p>With Burnham now all but certain...</p>
+          <p>Andy Burnham has set out his blueprint to transform the UK with a promise to improve living standards and restore faith in politics through the “biggest rebalancing of power our country has ever seen”.</p>
+
+          <p>The person widely expected to be the next prime minister said the current system was “broken” and that “more of the same” would not be enough to tackle the significant challenges faced by the country.</p>
+
+          <p>In a wide-ranging speech anchored by an ambition to “lift the country back up” and to revive hope among fed-up voters, Burnham said there needed to be a dramatic “change in how Britain is governed, not just who governs it”.</p>
+
+          <p>With Burnham now all but certain to take over from Keir Starmer in less than three weeks’ time, his address was intended to show what direction he will take the country, and reassure both Labour MPs and voters who may feel he is untested, and even unprepared, for power.</p>
         </section>
 
         <!-- SPORT -->
-        <section id="section-sport" class="section slide-in-right">
+        <section id="section-sport" class="section hidden">
           <h2 class="sport-title">England In The World Cup</h2>
 
           <img src="tuchel.png" alt="Thomas Tuchel England Manager" class="tuchel-img">
 
           <h3>Tuchel’s England Reach the round of 16</h3>
 
-          <p><strong>World Cup-</strong> Thomas Tuchel has officially taken charge...</p>
-          <p>Tuchel’s arrival has brought...</p>
-          <p>The biggest shift has been England’s shape...</p>
-          <p>Whether this new‑look England can win...</p>
-          <p>England's group stage matches have also proved...</p>
+          <p><strong>World Cup-</strong> Thomas Tuchel has officially taken charge of England’s national team, and the Three Lions now have a completely different playstyle. After speculation and questions about whether the former Chelsea and Bayern Munich manager could adapt to international football, Tuchel has delivered a clear message: England will play on the front foot.</p>
+
+          <p>Tuchel’s arrival has brought a level of intensity and structure England fans are excited about. Training sessions have been described as “relentless,” with players pushed to operate in tight spaces, recycle possession quickly, and press with coordinated aggression. Several squad members have privately admitted that Tuchel’s tactical detail is “unlike anything they’ve experienced at international level.”</p>
+
+          <p>The biggest shift has been England’s shape. Tuchel has implemented a flexible 3‑4‑3 system, allowing England to dominate transitions while giving creative freedom to attacking stars like Jude Bellingham and Phil Foden. Harry Kane has praised Tuchel’s tactics, saying the team “finally feels like it has a clear plan in every phase of play.”</p>
+
+          <p>Whether this new‑look England can win the world cup to be seen, but one thing is clear: under Thomas Tuchel, England are a clear contender for the World Cup title.</p>
+
+          <p>England's group stage matches have also proved that Tuchel is a manager worthy to get your hopes up for. As showun in the opening group stage game against Croatia (4-2 win) England can play with a wonderful attack and good defense. After a frustrating 0-0 draw against the heavily defensive Ghana, Tuchel has proved himself again after a masterclass 2-1 win against Panama. Hopes for a world cup title are at an all-time high.</p>
         </section>
 
       </div>
@@ -243,7 +269,8 @@
     </div>
 
     <script>
-      /* HASH ROUTING + SLIDE ANIMATIONS */
+      /* TAB ORDER FOR DIRECTION */
+      const tabOrder = ["home", "news", "sport"];
       let currentSection = "home";
 
       function hashToSection(hash) {
@@ -254,38 +281,53 @@
         return "home";
       }
 
-      function animateSectionChange(newSection) {
+      function setActiveNav(name) {
+        ["home", "news", "sport"].forEach(s => {
+          document.getElementById("nav-" + s).classList.toggle("active", s === name);
+        });
+      }
+
+      function switchSection(newSection) {
+        if (newSection === currentSection) return;
+
         const oldEl = document.getElementById("section-" + currentSection);
         const newEl = document.getElementById("section-" + newSection);
 
-        const order = ["home", "news", "sport"];
-        const oldIndex = order.indexOf(currentSection);
-        const newIndex = order.indexOf(newSection);
+        const oldIndex = tabOrder.indexOf(currentSection);
+        const newIndex = tabOrder.indexOf(newSection);
+        const goingRight = newIndex > oldIndex;
 
-        const direction = newIndex > oldIndex ? "right" : "left";
+        // prepare new section
+        newEl.classList.remove("hidden", "slide-in-from-left", "slide-in-from-right", "slide-active");
+        newEl.classList.add(goingRight ? "slide-in-from-right" : "slide-in-from-left");
 
-        oldEl.classList.remove("active-section");
-        oldEl.classList.add(direction === "right" ? "slide-out-left" : "slide-out-right");
+        // animate old section out
+        oldEl.classList.remove("slide-active", "slide-in-from-left", "slide-in-from-right");
+        oldEl.classList.add(goingRight ? "slide-out-to-left" : "slide-out-to-right");
 
-        newEl.classList.remove("slide-in-left", "slide-in-right", "slide-out-left", "slide-out-right");
-        newEl.classList.add(direction === "right" ? "slide-in-right" : "slide-in-left");
-
+        // after animation, hide old and show new
         setTimeout(() => {
-          oldEl.classList.remove("slide-out-left", "slide-out-right");
-          newEl.classList.remove("slide-in-left", "slide-in-right");
-          newEl.classList.add("active-section");
-        }, 600);
+          oldEl.classList.add("hidden");
+          oldEl.classList.remove("slide-out-to-left", "slide-out-to-right");
+
+          newEl.classList.remove("slide-in-from-left", "slide-in-from-right");
+          newEl.classList.add("slide-active");
+        }, 500);
 
         currentSection = newSection;
-      }
-
-      function showSection(name) {
-        animateSectionChange(name);
+        setActiveNav(newSection);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       window.addEventListener("load", function () {
         if (!location.hash) location.replace("#/home");
-        showSection(hashToSection(location.hash));
+        const initial = hashToSection(location.hash);
+        currentSection = initial;
+
+        // show initial section
+        document.getElementById("section-" + initial).classList.remove("hidden");
+        document.getElementById("section-" + initial).classList.add("slide-active");
+        setActiveNav(initial);
 
         setTimeout(() => {
           document.getElementById("cookiesBar").classList.add("show");
@@ -293,7 +335,8 @@
       });
 
       window.addEventListener("hashchange", function () {
-        showSection(hashToSection(location.hash));
+        const target = hashToSection(location.hash);
+        switchSection(target);
       });
 
       /* COOKIES */
@@ -325,3 +368,4 @@
 
   </body>
 </html>
+
