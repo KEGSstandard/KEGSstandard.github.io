@@ -42,7 +42,7 @@
       /* Cookies popup */
       .cookies-popup {
         position: fixed;
-        bottom: 0;
+        bottom: -200px; /* start hidden */
         left: 0;
         right: 0;
         background: #222;
@@ -53,6 +53,16 @@
         align-items: center;
         font-size: 16px;
         box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+        transition: bottom 0.6s ease; /* glide animation */
+      }
+
+      .cookies-popup.show {
+        bottom: 0; /* glide in */
+      }
+
+      .cookies-buttons {
+        display: flex;
+        gap: 10px;
       }
 
       .cookies-popup button {
@@ -67,6 +77,14 @@
 
       .cookies-popup button:hover {
         background: #a80000;
+      }
+
+      .reject-btn {
+        background: #555;
+      }
+
+      .reject-btn:hover {
+        background: #333;
       }
     </style>
   </head>
@@ -87,10 +105,24 @@
     <!-- Cookies Popup -->
     <div class="cookies-popup" id="cookiesBar">
       <span>This website uses cookies to improve your experience.</span>
-      <button onclick="document.getElementById('cookiesBar').style.display='none'">
-        Accept All Cookies
-      </button>
+
+      <div class="cookies-buttons">
+        <button onclick="hideCookies()">Accept All Cookies</button>
+        <button class="reject-btn" onclick="hideCookies()">Reject Cookies</button>
+      </div>
     </div>
+
+    <script>
+      // Glide in after page loads
+      window.onload = function() {
+        document.getElementById('cookiesBar').classList.add('show');
+      };
+
+      // Glide out when either button is clicked
+      function hideCookies() {
+        document.getElementById('cookiesBar').classList.remove('show');
+      }
+    </script>
 
   </body>
 </html>
