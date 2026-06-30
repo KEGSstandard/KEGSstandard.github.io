@@ -15,15 +15,27 @@
         font-family: Arial, Helvetica, sans-serif;
         background: #f7f7f7;
         color: #111;
+        padding-top: 120px; /* prevents content jumping under header */
       }
 
-      /* THICK HEADER */
+      /* THICK HEADER — now animated */
       .header {
         background-color: #cc0000;
         padding: 32px 35px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2000;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+      }
+
+      .header.hide {
+        transform: translateY(-100%);
+        opacity: 0;
       }
 
       /* LEFT NAV */
@@ -72,6 +84,32 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         min-height: 220px;
         font-size: 18px;
+      }
+
+      /* SPORT TITLE — centred + Guardian style + underline */
+      .sport-title {
+        text-align: center;
+        font-family: 'Merriweather', serif;
+        font-size: 48px;
+        font-weight: 900;
+        color: #111;
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 4px solid #cc0000;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* CENTRED TUCHEL IMAGE */
+      .tuchel-img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 600px;
+        border-radius: 6px;
+        margin-bottom: 20px;
       }
 
       /* COOKIES POPUP */
@@ -154,11 +192,11 @@
           <p>News</p>
         </section>
 
-        <!-- SPORT — FULL ARTICLE -->
+        <!-- SPORT -->
         <section id="section-sport" style="display:none;">
-          <h2>Sport</h2>
+          <h2 class="sport-title">Sport</h2>
 
-          <img src="tuchel.png" alt="Thomas Tuchel England Manager" style="width:100%; max-width:600px; border-radius:6px; margin-bottom:20px;">
+          <img src="tuchel.png" alt="Thomas Tuchel England Manager" class="tuchel-img">
 
           <h3>Tuchel’s England Reach the round of 16</h3>
 
@@ -224,6 +262,22 @@
         bar.classList.remove('show');
         setTimeout(() => bar.style.display = 'none', 650);
       }
+
+      /* HEADER SCROLL ANIMATION */
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        const header = document.querySelector('.header');
+
+        if (currentScroll > lastScroll) {
+          header.classList.add('hide'); // scrolling down → hide
+        } else {
+          header.classList.remove('hide'); // scrolling up → show
+        }
+
+        lastScroll = currentScroll;
+      });
     </script>
 
   </body>
