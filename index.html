@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap" rel="stylesheet">
 
     <style>
-      /* Basic reset */
       * { box-sizing: border-box; }
       body {
         margin: 0;
@@ -20,8 +19,8 @@
 
       /* THICK HEADER */
       .header {
-        background-color: #cc0000; /* KEGS red */
-        padding: 28px 30px;       /* thicker bar */
+        background-color: #cc0000;
+        padding: 28px 30px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -48,9 +47,7 @@
         border-bottom: 3px solid white;
       }
 
-      .nav-left a:hover {
-        opacity: 0.9;
-      }
+      .nav-left a:hover { opacity: 0.9; }
 
       /* RIGHT TITLE (stacked KEGS / Standard) */
       .title-right {
@@ -60,23 +57,11 @@
         line-height: 0.9;
       }
 
-      .title-right .top {
-        font-size: 46px;
-        font-weight: 900;
-      }
-
-      .title-right .bottom {
-        font-size: 34px;
-        font-weight: 900;
-      }
+      .title-right .top { font-size: 46px; font-weight: 900; }
+      .title-right .bottom { font-size: 34px; font-weight: 900; }
 
       /* PAGE LAYOUT */
-      .container {
-        max-width: 1000px;
-        margin: 28px auto;
-        padding: 0 20px;
-      }
-
+      .container { max-width: 1000px; margin: 28px auto; padding: 0 20px; }
       .content {
         background: white;
         padding: 28px;
@@ -89,7 +74,7 @@
       /* COOKIES POPUP */
       .cookies-popup {
         position: fixed;
-        bottom: -220px; /* hidden start */
+        bottom: -220px;
         left: 0;
         right: 0;
         background: #222;
@@ -100,18 +85,12 @@
         align-items: center;
         font-size: 15px;
         box-shadow: 0 -6px 18px rgba(0,0,0,0.35);
-        transition: bottom 0.6s cubic-bezier(.2,.9,.2,1); /* glide */
+        transition: bottom 0.6s cubic-bezier(.2,.9,.2,1);
         z-index: 1200;
       }
 
-      .cookies-popup.show {
-        bottom: 18px; /* glide in */
-      }
-
-      .cookies-buttons {
-        display: flex;
-        gap: 10px;
-      }
+      .cookies-popup.show { bottom: 18px; }
+      .cookies-buttons { display: flex; gap: 10px; }
 
       .cookies-popup button {
         background: #cc0000;
@@ -124,14 +103,9 @@
       }
 
       .cookies-popup button:hover { filter: brightness(0.92); }
-
-      .reject-btn {
-        background: #555;
-      }
-
+      .reject-btn { background: #555; }
       .reject-btn:hover { filter: brightness(0.9); }
 
-      /* Responsive tweaks */
       @media (max-width: 720px) {
         .header { padding: 18px 16px; }
         .nav-left a { font-size: 18px; gap: 16px; }
@@ -146,12 +120,11 @@
 
     <!-- HEADER -->
     <div class="header">
-      <!-- LEFT NAV -->
+      <!-- LEFT NAV uses hash links so refresh won't request a new path -->
       <nav class="nav-left" aria-label="Main navigation">
-        <!-- Use full-path links so direct visits work; JS will intercept clicks to avoid reload -->
-        <a href="/home" id="nav-home">Home</a>
-        <a href="/news" id="nav-news">News</a>
-        <a href="/sport" id="nav-sport">Sport</a>
+        <a href="#/home" id="nav-home">Home</a>
+        <a href="#/news" id="nav-news">News</a>
+        <a href="#/sport" id="nav-sport">Sport</a>
       </nav>
 
       <!-- RIGHT STACKED TITLE -->
@@ -171,13 +144,13 @@
           <p>This is my first website hosted on GitHub Pages.</p>
         </section>
 
-        <!-- News section (hidden by default) -->
+        <!-- News section -->
         <section id="section-news" style="display:none;">
           <h2>News</h2>
           <p>News</p>
         </section>
 
-        <!-- Sport section (hidden by default) -->
+        <!-- Sport section -->
         <section id="section-sport" style="display:none;">
           <h2>Sport</h2>
           <p>Sport</p>
@@ -189,7 +162,6 @@
     <!-- COOKIES POPUP -->
     <div class="cookies-popup" id="cookiesBar" role="dialog" aria-live="polite">
       <span>This website uses cookies to improve your experience.</span>
-
       <div class="cookies-buttons">
         <button id="acceptBtn">Accept All Cookies</button>
         <button id="rejectBtn" class="reject-btn">Reject Cookies</button>
@@ -197,79 +169,36 @@
     </div>
 
     <script>
-      // Map path -> section name
-      function pathToSection(path) {
-        const p = (path || '/').replace(/\/+$/, ''); // remove trailing slash
-        if (p === '' || p === '/' || p === '/home') return 'home';
-        if (p === '/news') return 'news';
-        if (p === '/sport') return 'sport';
-        // default fallback
+      // Hash routing: map hash -> section
+      function hashToSection(hash) {
+        const h = (hash || '#/home').replace(/^#/, '').replace(/\/+$/, '');
+        if (h === '' || h === '/' || h === '/home') return 'home';
+        if (h === '/news') return 'news';
+        if (h === '/sport') return 'sport';
         return 'home';
       }
 
-      // Show the named section and update active nav link
-      function showSection(name, pushStatePath) {
+      function showSection(name) {
         const sections = ['home','news','sport'];
         sections.forEach(s => {
           const el = document.getElementById('section-' + s);
           if (s === name) el.style.display = '';
           else el.style.display = 'none';
         });
-
-        // update active nav link
         sections.forEach(s => {
           const link = document.getElementById('nav-' + s);
           if (s === name) link.classList.add('active');
           else link.classList.remove('active');
         });
-
-        // update URL if requested
-        if (pushStatePath) {
-          history.pushState({section: name}, '', pushStatePath);
-        }
-
-        // scroll to top of content area for better UX
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // Intercept nav clicks to avoid full reload and update URL
-      function setupNavInterception() {
-        const links = document.querySelectorAll('.nav-left a');
-        links.forEach(link => {
-          link.addEventListener('click', function(e) {
-            // allow modifier keys to open in new tab
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-            e.preventDefault();
-            const href = new URL(link.href, location.origin);
-            const targetPath = href.pathname.replace(/\/+$/, '') || '/home';
-            const section = pathToSection(targetPath);
-            showSection(section, targetPath);
-          });
-        });
-      }
-
-      // Handle back/forward navigation
-      window.addEventListener('popstate', function(event) {
-        const section = pathToSection(location.pathname);
-        showSection(section, null); // don't push state on pop
-      });
-
-      // Show cookies bar on load (glide in)
+      // On load: show section based on hash
       window.addEventListener('load', function() {
-        // Initialize nav interception
-        setupNavInterception();
-
-        // Determine initial section from URL
-        const initial = pathToSection(location.pathname);
-        // If user visits root '/', redirect to /home without reload for clarity
-        if (location.pathname === '/' || location.pathname === '') {
-          history.replaceState({section: 'home'}, '', '/home');
-        } else {
-          // ensure URL is normalized (e.g., trailing slash removed)
-          const normalized = (location.pathname.replace(/\/+$/, '') || '/home');
-          history.replaceState({section: initial}, '', normalized);
-        }
-        showSection(initial, null);
+        const initial = hashToSection(location.hash);
+        // If no hash present, set to #/home
+        if (!location.hash) location.replace('#/home');
+        showSection(initial);
 
         // show cookies bar after a short delay
         setTimeout(function() {
@@ -277,18 +206,21 @@
         }, 450);
       });
 
-      // Slide out when either button clicked
+      // On hash change (back/forward or link click)
+      window.addEventListener('hashchange', function() {
+        const section = hashToSection(location.hash);
+        showSection(section);
+      });
+
+      // Cookies buttons
       document.getElementById('acceptBtn').addEventListener('click', hideCookies);
       document.getElementById('rejectBtn').addEventListener('click', hideCookies);
-
       function hideCookies() {
         const bar = document.getElementById('cookiesBar');
         bar.classList.remove('show');
-        // allow the glide-out to finish before fully hiding (optional)
         setTimeout(function(){ bar.style.display = 'none'; }, 650);
       }
     </script>
 
   </body>
 </html>
-
