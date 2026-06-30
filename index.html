@@ -15,10 +15,10 @@
         font-family: Arial, Helvetica, sans-serif;
         background: #f7f7f7;
         color: #111;
-        padding-top: 120px; /* prevents content jumping under header */
+        padding-top: 120px;
       }
 
-      /* THICK HEADER — animated */
+      /* HEADER (animated on scroll) */
       .header {
         background-color: #cc0000;
         padding: 32px 35px;
@@ -38,7 +38,7 @@
         opacity: 0;
       }
 
-      /* LEFT NAV */
+      /* NAV */
       .nav-left {
         display: flex;
         gap: 32px;
@@ -61,13 +61,12 @@
         opacity: 0.9;
       }
 
-      /* RIGHT TITLE — SINGLE LINE */
+      /* TITLE */
       .title-right {
         color: white;
         font-family: 'Merriweather', serif;
         font-size: 58px;
         font-weight: 900;
-        letter-spacing: 0.5px;
       }
 
       /* PAGE LAYOUT */
@@ -84,24 +83,11 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         min-height: 220px;
         font-size: 18px;
+        overflow: hidden; /* important for slide animations */
       }
 
-      /* NEWS TITLE — Guardian style */
-      .news-title {
-        text-align: center;
-        font-family: 'Merriweather', serif;
-        font-size: 48px;
-        font-weight: 900;
-        color: #111;
-        margin-bottom: 20px;
-        padding-bottom: 8px;
-        border-bottom: 4px solid #cc0000;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* SPORT TITLE — Guardian style */
+      /* TITLES */
+      .news-title,
       .sport-title {
         text-align: center;
         font-family: 'Merriweather', serif;
@@ -116,7 +102,7 @@
         margin-right: auto;
       }
 
-      /* CENTRED IMAGES */
+      /* IMAGES */
       .tuchel-img,
       .burnham-img {
         display: block;
@@ -127,6 +113,21 @@
         border-radius: 6px;
         margin-bottom: 20px;
       }
+
+      /* SLIDE ANIMATIONS */
+      .section {
+        position: absolute;
+        width: 100%;
+        transition: transform 0.6s ease, opacity 0.6s ease;
+      }
+
+      .slide-in-right { transform: translateX(100%); opacity: 0; }
+      .slide-in-left { transform: translateX(-100%); opacity: 0; }
+
+      .active-section { transform: translateX(0); opacity: 1; }
+
+      .slide-out-left { transform: translateX(-100%); opacity: 0; }
+      .slide-out-right { transform: translateX(100%); opacity: 0; }
 
       /* COOKIES POPUP */
       .cookies-popup {
@@ -197,47 +198,36 @@
       <div class="content">
 
         <!-- HOME -->
-        <section id="section-home">
+        <section id="section-home" class="section active-section">
           <h2>About Us</h2>
-          <p>This is the official website of the KEGS Standard newspaper. This newspaper was built as a part of the KEGS newsday, and as 9C, we are looking forward to winning out of the other classes.c To view different articles, either buy our newspaper or view the selection of articles we have on the website itself - at the top left-hand corner.</p>
+          <p>This is the official website of the KEGS Standard newspaper...</p>
         </section>
 
         <!-- NEWS -->
-        <section id="section-news" style="display:none;">
+        <section id="section-news" class="section slide-in-right">
           <h2 class="news-title">Andy Burnham to "transform Britain"</h2>
 
           <img src="andyburnham.png" alt="Andy Burnham" class="burnham-img">
 
-          <p>Andy Burnham has set out his blueprint to transform the UK with a promise to improve living standards and restore faith in politics through the “biggest rebalancing of power our country has ever seen”.</p>
-
-          <p>The person widely expected to be the next prime minister said the current system was “broken” and that “more of the same” would not be enough to tackle the significant challenges faced by the country.</p>
-
-          <p>In a wide-ranging speech anchored by an ambition to “lift the country back up” and to revive hope among fed-up voters, Burnham said there needed to be a dramatic “change in how Britain is governed, not just who governs it”.</p>
-
-          <p>With Burnham now all but certain to take over from Keir Starmer in less than three weeks’ time, his address was intended to show what direction he will take the country, and reassure both Labour MPs and voters who may feel he is untested, and even unprepared, for power.</p>
-
-          <p>In his speech, Burnham once again sought to reassure that he would stick to Rachel Reeves’s fiscal rules, after he suggested last year the UK was “in hock” to bond markets, saying his programme was backed by the “discipline that comes from sound public finances”.</p>
-
-          <p>Burnham, who served in the last Labour government and sat on the opposition benches until he became mayor of Greater Manchester, said his generation of politicians had to take responsibility for not being good enough.</p>
+          <p>Andy Burnham has set out his blueprint...</p>
+          <p>The person widely expected...</p>
+          <p>In a wide-ranging speech...</p>
+          <p>With Burnham now all but certain...</p>
         </section>
 
         <!-- SPORT -->
-        <section id="section-sport" style="display:none;">
+        <section id="section-sport" class="section slide-in-right">
           <h2 class="sport-title">England In The World Cup</h2>
 
           <img src="tuchel.png" alt="Thomas Tuchel England Manager" class="tuchel-img">
 
           <h3>Tuchel’s England Reach the round of 16</h3>
 
-          <p><strong>World Cup-</strong> Thomas Tuchel has officially taken charge of England’s national team, and the Three Lions now have a completely different playstyle. After speculation and questions about whether the former Chelsea and Bayern Munich manager could adapt to international football, Tuchel has delivered a clear message: England will play on the front foot.</p>
-
-          <p>Tuchel’s arrival has brought a level of intensity and structure England fans are excited about. Training sessions have been described as “relentless,” with players pushed to operate in tight spaces, recycle possession quickly, and press with coordinated aggression. Several squad members have privately admitted that Tuchel’s tactical detail is “unlike anything they’ve experienced at international level.”</p>
-
-          <p>The biggest shift has been England’s shape. Tuchel has implemented a flexible 3‑4‑3 system, allowing England to dominate transitions while giving creative freedom to attacking stars like Jude Bellingham and Phil Foden. Harry Kane has praised Tuchel’s tactics, saying the team “finally feels like it has a clear plan in every phase of play.”</p>
-
-          <p>Whether this new‑look England can win the world cup to be seen, but one thing is clear: under Thomas Tuchel, England are a clear contender for the World Cup title.</p>
-
-          <p>England's group stage matches have also proved that Tuchel is a manager worthy to get your hopes up for. As showun in the opening group stage game against Croatia (4-2 win) England can play with a wonderful attack and good defense. After a frustrating 0-0 draw against the heavily defensive Ghana, Tuchel has proved himself again after a masterclass 2-1 win against Panama. Hopes for a world cup title are at an all-time high.</p>
+          <p><strong>World Cup-</strong> Thomas Tuchel has officially taken charge...</p>
+          <p>Tuchel’s arrival has brought...</p>
+          <p>The biggest shift has been England’s shape...</p>
+          <p>Whether this new‑look England can win...</p>
+          <p>England's group stage matches have also proved...</p>
         </section>
 
       </div>
@@ -253,56 +243,80 @@
     </div>
 
     <script>
+      /* HASH ROUTING + SLIDE ANIMATIONS */
+      let currentSection = "home";
+
       function hashToSection(hash) {
-        const h = (hash || '#/home').replace(/^#/, '').replace(/\/+$/, '');
-        if (h === '' || h === '/' || h === '/home') return 'home';
-        if (h === '/news') return 'news';
-        if (h === '/sport') return 'sport';
-        return 'home';
+        const h = (hash || "#/home").replace(/^#/, "").replace(/\/+$/, "");
+        if (h === "" || h === "/" || h === "/home") return "home";
+        if (h === "/news") return "news";
+        if (h === "/sport") return "sport";
+        return "home";
+      }
+
+      function animateSectionChange(newSection) {
+        const oldEl = document.getElementById("section-" + currentSection);
+        const newEl = document.getElementById("section-" + newSection);
+
+        const order = ["home", "news", "sport"];
+        const oldIndex = order.indexOf(currentSection);
+        const newIndex = order.indexOf(newSection);
+
+        const direction = newIndex > oldIndex ? "right" : "left";
+
+        oldEl.classList.remove("active-section");
+        oldEl.classList.add(direction === "right" ? "slide-out-left" : "slide-out-right");
+
+        newEl.classList.remove("slide-in-left", "slide-in-right", "slide-out-left", "slide-out-right");
+        newEl.classList.add(direction === "right" ? "slide-in-right" : "slide-in-left");
+
+        setTimeout(() => {
+          oldEl.classList.remove("slide-out-left", "slide-out-right");
+          newEl.classList.remove("slide-in-left", "slide-in-right");
+          newEl.classList.add("active-section");
+        }, 600);
+
+        currentSection = newSection;
       }
 
       function showSection(name) {
-        const sections = ['home','news','sport'];
-        sections.forEach(s => {
-          document.getElementById('section-' + s).style.display = (s === name ? '' : 'none');
-          document.getElementById('nav-' + s).classList.toggle('active', s === name);
-        });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        animateSectionChange(name);
       }
 
-      window.addEventListener('load', function() {
-        if (!location.hash) location.replace('#/home');
+      window.addEventListener("load", function () {
+        if (!location.hash) location.replace("#/home");
         showSection(hashToSection(location.hash));
 
         setTimeout(() => {
-          document.getElementById('cookiesBar').classList.add('show');
+          document.getElementById("cookiesBar").classList.add("show");
         }, 450);
       });
 
-      window.addEventListener('hashchange', function() {
+      window.addEventListener("hashchange", function () {
         showSection(hashToSection(location.hash));
       });
 
-      document.getElementById('acceptBtn').addEventListener('click', hideCookies);
-      document.getElementById('rejectBtn').addEventListener('click', hideCookies);
+      /* COOKIES */
+      document.getElementById("acceptBtn").addEventListener("click", hideCookies);
+      document.getElementById("rejectBtn").addEventListener("click", hideCookies);
 
       function hideCookies() {
-        const bar = document.getElementById('cookiesBar');
-        bar.classList.remove('show');
-        setTimeout(() => bar.style.display = 'none', 650);
+        const bar = document.getElementById("cookiesBar");
+        bar.classList.remove("show");
+        setTimeout(() => (bar.style.display = "none"), 650);
       }
 
       /* HEADER SCROLL ANIMATION */
       let lastScroll = 0;
 
-      window.addEventListener('scroll', function() {
+      window.addEventListener("scroll", function () {
         const currentScroll = window.pageYOffset;
-        const header = document.querySelector('.header');
+        const header = document.querySelector(".header");
 
         if (currentScroll > lastScroll) {
-          header.classList.add('hide'); // scrolling down → hide
+          header.classList.add("hide");
         } else {
-          header.classList.remove('hide'); // scrolling up → show
+          header.classList.remove("hide");
         }
 
         lastScroll = currentScroll;
@@ -311,4 +325,3 @@
 
   </body>
 </html>
-
